@@ -1,6 +1,6 @@
 # xiaohongshu-mcp-skills
 
-基于 [xiaohongshu-mcp](https://github.com/xpzouying/xiaohongshu-mcp) 的 Claude Code Skills 集合，为小红书提供完整的自动化操作能力。
+基于 [xiaohongshu-mcp](https://github.com/xpzouying/xiaohongshu-mcp) 的 Agent Skills 集合，为小红书提供完整的自动化操作能力。兼容 [Agent Skills 开放标准](https://agentskills.io)，支持 OpenClaw、Claude Code 等平台。
 
 ## 功能
 
@@ -22,7 +22,17 @@
 
 ## 安装
 
-将 skills 目录复制到 Claude Code 的 skills 路径：
+### OpenClaw
+
+```bash
+openclaw skills add https://github.com/autoclaw-cc/xiaohongshu-mcp-skills
+```
+
+或在 OpenClaw Control UI 的 Skills 标签页中，点击 "Add from URL"，粘贴本仓库地址即可。
+
+安装后 skills 会被放置到 `~/.openclaw/skills/xiaohongshu-mcp-skills/`，重启会话生效。
+
+### Claude Code
 
 ```bash
 # 项目级别
@@ -37,7 +47,7 @@ cp -r skills/ ~/.claude/skills/
 ## 使用示例
 
 ```
-# 首次使用：安装和登录
+# 首次使用：安装 MCP 服务和登录
 /setup-xhs-mcp
 /xhs-login
 
