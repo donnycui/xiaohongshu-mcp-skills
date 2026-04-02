@@ -54,3 +54,4 @@ description: |
 4. **参数来源**：`feed_id` 和 `xsec_token` 必须从搜索或浏览结果中获取，不可编造——编造的参数会导致 MCP 工具报错
 5. **默认只读**：搜索、浏览、分析优先；发布/评论/点赞/收藏必须有明确用户指令
 6. **多实例保守策略**：第一版只绑定一个主实例；不要在 skill 层自行 multiplex 多个小红书账号
+7. **搜索参数固定写法**：调用 `search_feeds` 时不要用位置参数推断；统一按对象传参，例如 `{"keyword":"自动化","filters":{"sort_by":"综合"}}`。因为该工具签名是 `search_feeds(filters?: unknown, keyword: string)`，如果把关键词放成第一个位置参数，MCP 会把它当成 `filters`
