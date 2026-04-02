@@ -20,11 +20,51 @@
 - 已安装并运行 [xiaohongshu-mcp](https://github.com/xpzouying/xiaohongshu-mcp) 服务
 - 如未安装，使用 `setup-xhs-mcp` skill 引导完成
 
+## 当前推荐接法
+
+如果你的环境和 OpenClaw/brain-hq 类似，推荐采用：
+
+- 底层：继续用 `xiaohongshu-mcp` 做 MCP 服务
+- 会话层：用本 skill 做 OpenClaw 操作封装
+- `n8n`：继续直接调 MCP，不通过 skill
+
+### 单实例优先
+
+第一版不要让一个 skill 直接轮由多个小红书实例。
+
+推荐先绑定一个主实例，例如：
+
+- `xhs-a`
+- `http://127.0.0.1:28061/mcp`
+
+其余实例如 `xhs-b / xhs-c / backup` 先保留给：
+
+- 账号轮换
+- 发布链
+- 备用容灾
+
+而不是让 skill 自动 multiplex。
+
 ## 安装
 
 ### OpenClaw
 
 下载本项目到本地后，解压到 OpenClaw 的 SKILLS 目录下重启会话生效。
+
+如果你的 OpenClaw 使用 `mcporter`，建议先在 MCP 配置中加一个命名 server，例如：
+
+```json
+{
+  "mcpServers": {
+    "xhs-a": {
+      "type": "streamable-http",
+      "url": "http://127.0.0.1:28061/mcp"
+    }
+  }
+}
+```
+
+然后再安装本 skill。
 
 ### Claude Code
 

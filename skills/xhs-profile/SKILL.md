@@ -7,6 +7,8 @@ description: |
 
 ## 执行流程
 
+默认使用当前 OpenClaw 绑定的小红书主实例（推荐 `xhs-a`）。
+
 ### 1. 获取用户信息
 
 调用 `user_profile`：

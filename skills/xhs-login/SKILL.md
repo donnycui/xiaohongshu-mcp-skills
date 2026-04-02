@@ -7,16 +7,26 @@ description: |
 
 ## 执行流程
 
+### 当前默认实例
+
+如无额外说明，默认检查当前 OpenClaw 已绑定的小红书主实例（推荐 `xhs-a`）。
+
+如果环境里存在多个小红书实例：
+
+- 不要自动切换到其他实例
+- 不要假定 backup 实例可用
+- 只处理当前绑定实例的登录状态
+
 ### 1. 检查登录状态
 
-调用 `check_login_status`（无参数），返回是否已登录及用户名。
+调用当前绑定实例的 `check_login_status`（无参数），返回是否已登录及用户名。
 
 - 已登录 → 告知用户当前登录账号
 - 未登录 → 进入步骤 2
 
 ### 2. 扫码登录
 
-调用 `get_login_qrcode`（无参数）。MCP 工具返回两部分内容：
+调用当前绑定实例的 `get_login_qrcode`（无参数）。MCP 工具返回两部分内容：
 - 文本：超时提示（含截止时间）
 - 图片：PNG 格式二维码（MCP image content type，Base64 编码）
 
@@ -39,7 +49,7 @@ xdg-open /tmp/xhs-qrcode.png  # Linux
 当用户要求重新登录或切换账号时：
 
 1. 调用 `delete_cookies`（⚠️ 需用户确认）— 清除当前登录状态
-2. 调用 `get_login_qrcode` — 获取新二维码
+2. 调用当前绑定实例的 `get_login_qrcode` — 获取新二维码
 3. 引导用户扫码
 
 ## 约束
